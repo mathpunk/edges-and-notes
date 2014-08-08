@@ -1,0 +1,47 @@
+Terms
+  attrs
+    made-up?
+    mathy word?
+    punk as fuck word?
+    swear word?
+    ordinary abstraction word?
+    stop word?
+  edges
+    sub term
+    super term
+    synonym term
+    antonym term
+
+Notes
+  attrs
+    id
+    _id
+    title
+    content
+    url
+   edges
+     tagged-with term
+     has-as-vocabulary term
+
+Material
+  attrs
+    title
+    content
+    url, presumably
+    images, if any
+    references, if any
+    diagrams, if any
+    word count
+  edges
+    relevant term
+    refers-to note
+
+ Cards
+   has annotation
+     if so, diagram?
+     if so, transcription?
+     if so, quality?
+     if so, reject?
+
+
+
