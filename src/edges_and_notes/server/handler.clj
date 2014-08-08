@@ -1,4 +1,4 @@
-(ns edges-and-notes.handler
+(ns edges-and-notes.server.handler
   (:require [compojure.core :refer :all]
             [compojure.handler :as handler]
             [compojure.route :as route]))
@@ -28,19 +28,20 @@
 </html>" ))
 
 (def bad-test-data
-     "{ 
-        \"nodes\": 
-          [ { \"id\": 1 }, 
-            { \"id\": 2 }, 
-            { \"id\": 3 } ], 
-        \"edges\": 
-          [ { \"source\": 1, \"target\": 2 }, 
-            { \"source\": 1, \"target\": 3, } ] 
+     "{
+        \"nodes\":
+          [ { \"id\": 1 },
+            { \"id\": 2 },
+            { \"id\": 3 } ],
+        \"edges\":
+          [ { \"source\": 1, \"target\": 2 },
+            { \"source\": 1, \"target\": 3, } ]
      };")
 
 (defroutes app-routes
+  (GET "/" [] "oh hai i'm teh internet")
   (GET "/wat" [] (bad-alchemy bad-test-data))
-  (route/resources "/")
+  (route/resources "/")                          ;; These two routes came with the new Compojure project.
   (route/not-found "Not Found"))
 
 (def app

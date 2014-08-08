@@ -1,8 +1,10 @@
-(ns edges-and-notes.db.core
+(ns edges-and-notes.data.core
     (:require [monger.core :as mg]
               [monger.collection :as mc]
               [monger.operators :refer :all]))
 
+;; livre is the name of the database
+;; feuille is an ssh tunnel to where the database is hosted
 (let [uri "mongodb://feuille/livre"]
   (mg/connect-via-uri! uri))
 
@@ -12,35 +14,16 @@
 ; db livre
 
 ; collections
-;   agents
-;   annotations     ; markings for cards
-;   articles        ; threw a pm wiki at it or something?
+; INDEX CARDS
 ;   cards           ; pictures of cards
-;   evernotes       ; notes migrated from evernote, lacking dates
-;   fs.chunks       ; internal?
-;   fs.files        ; internal?
+;   annotations     ; markings for cards
+;   agents          ; useragents of those who marked cards
+; NOTEBOOK SCANS
 ;   notebookPages   ; pictures of notebook pages
-;   system.indexes  ; internal?
+; NOTES
+;   evernotes       ; notes migrated from evernote, lacking dates
+;   articles        ; threw a pm wiki at it or something?
 
-
-;; =====================================================================
-;; NOTES
-;; =====================================================================
-
-(def ^:dynamic *coll* "evernotes")
-(def ^:dynamic *field* (partial assoc {} "tags"))
-
-(mc/find-maps *coll* (*field*reference. "fucked"))
-
-(defn find-maps []
-  (mc/find-maps *coll* (*field* searching)))
-
-(find-maps "fucked")
-
-(defn get-some-marked-note [term]
-  (mc/find-one-as-map "evernotes" {:tags term :notebook (or "morgue" "morgue archive")}))
-
-(:_id (get-some-marked-note "networks"))
-(get-some-marked-note "networks")
-
-
+(let [coll "evernotes"
+      term "fucked"]
+  (mc/find-one-as-map coll {:tags term :notebook (or "morgue" "morgue archive")}))

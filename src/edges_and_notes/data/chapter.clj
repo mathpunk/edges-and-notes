@@ -1,4 +1,4 @@
-(ns edges-and-nodes.model.chapter
+(ns edges-and-nodes.data.chapter
   (:require [clojurewerkz.neocons.rest :as nr]
             [clojurewerkz.neocons.rest.nodes :as nn]
             [clojurewerkz.neocons.rest.relationships :as nrl]

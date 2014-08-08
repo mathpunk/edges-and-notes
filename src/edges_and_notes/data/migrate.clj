@@ -1,4 +1,4 @@
-(ns edges-and-notes.db.migrate
+(ns edges-and-notes.data.migrate
   (:require [clojurewerkz.neocons.rest :as rest]
             [clojurewerkz.neocons.rest.nodes :as nodes]
             [clojurewerkz.neocons.rest.relationships :as edges]
@@ -20,6 +20,9 @@
 ; the unique node for that terms.
 ; so, don't forget to create terms.
 
+; SPIKE
+; ==================================================================================
+; Toying with the problem
 (defn note-create! [{:keys [title content tags url oid id]}]
   (let [conn  (rest/connect "http://localhost:7474/db/data/")
         this-note (nodes/create conn {:title title :content content :url url})
@@ -36,3 +39,7 @@
   (doseq [term (:tags note)]
     (edges/create term note :type "tags")
     (edges/create note term :type "tagged")))
+
+; ACTUAL CODE
+; ==================================================================================
+; Write some damn tests first!

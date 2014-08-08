@@ -1,9 +1,13 @@
-(ns edges-and-notes.db.neo
+(ns edges-and-notes.data.neo
   (:require [clojurewerkz.neocons.rest :as rest]
             [clojurewerkz.neocons.rest.nodes :as nodes]
             [clojurewerkz.neocons.rest.relationships :as edges]
             [clojurewerkz.neocons.rest.cypher :as cy]))
 
+; This file is just an example from Clojurewerkz.neocons to see what cypher queries look like.
+
+
+; =======================================================================================
 ; Here is how to find all Amy's friends via Cypher:
 
 (let [conn  (rest/connect "http://localhost:7474/db/data/")
