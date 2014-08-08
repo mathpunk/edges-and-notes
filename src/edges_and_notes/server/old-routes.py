@@ -1,3 +1,5 @@
+# For reference to a previous implementation of a notes-server
+
 from flask import Flask, render_template
 from information import *
 import edn_format
@@ -26,8 +28,8 @@ def keyword_data():
 def keyword_list():
     return render_template("template.html", data=edn_format.dumps(list(keywords['word'])))
 
-# When we finally get around to actually reading a note, it should be grabbed 
-# out of a database somewhere and run through a template. 
+# When we finally get around to actually reading a note, it should be grabbed
+# out of a database somewhere and run through a template.
 @app.route('/notes/<identifier>')
 def note(identifier):
   pass
