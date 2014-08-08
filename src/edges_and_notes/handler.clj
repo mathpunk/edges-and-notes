@@ -19,6 +19,7 @@
    ;; it's a string of json
    ;; wtf
    ;; don't forget the semicolon
+   ;; and the escaped quotes
    ;; ohgod
    "alchemy.begin({\"dataSource\": some_data})
 </script>
@@ -27,10 +28,17 @@
 </html>" ))
 
 (def bad-test-data
-     "{ \"nodes\": [ { \"id\": 1 }, { \"id\": 2 }, { \"id\": 3 } ], \"edges\": [ { \"source\": 1, \"target\": 2 }, { \"source\": 1, \"target\": 3, } ] };")
+     "{ 
+        \"nodes\": 
+          [ { \"id\": 1 }, 
+            { \"id\": 2 }, 
+            { \"id\": 3 } ], 
+        \"edges\": 
+          [ { \"source\": 1, \"target\": 2 }, 
+            { \"source\": 1, \"target\": 3, } ] 
+     };")
 
 (defroutes app-routes
-  (GET "/" [] "Hello World")
   (GET "/wat" [] (bad-alchemy bad-test-data))
   (route/resources "/")
   (route/not-found "Not Found"))
