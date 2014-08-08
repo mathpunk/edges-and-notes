@@ -1,0 +1,99 @@
+# Workflow for notes
+
+put them in a file
+they get picked up by a cron job and chucked into the database with a "new" type
+cool stuff happens
+???
+
+
+# EDGES-AND-NOTES
+
+## Populate the database
+
+# Nodes. Protocol? 
+
+What do nodes have? 
+GraphJSON requires them to have:
+  id
+  attrs
+  caption
+From mongo they have:
+  ...
+
+GraphJSON is a JSON object that contains two objects, nodes and edges:
+
+{
+  "nodes": [...],
+  "edges": [...]
+
+}
+
+; The nodes and edges objects are arrays of the individual nodes and edges that will be represented in the Graph visualization.
+
+
+
+create-note
+  type
+    morgue
+    tweet ; tweets are a note. twitter is massive note-passing in class.
+  attrs
+    notebook
+    url
+    title
+    content
+    _id / id /n_id ; made by neo?
+  edges
+    note tagged term
+    note related-to note :weighted f
+
+create-term
+  ; these are words people
+  type
+    might be from the tag set
+    might be in vocabulary
+    might be a swear
+  helpers
+    subtract-whitespace 
+    add-whitespace
+    downcase
+  edges
+    term tags note(s)
+    term is-related-to term :weighted f
+
+create-reference 
+  type
+    might be a book
+    might be a link
+    might be a quotation
+    might be...
+
+## Design the View
+note-view
+  id
+  caption
+    ?
+    what would be cool is a tiny word cloud
+    what would be practical is, show all the tags, or show the title
+      wouldn't it be neat if it showed all the tags, and its vocabulary intersect all-the-
+      all-the-tags, and their size would be proportionate to their importance in the all-
+      the-all-the-tags
+  behaviors
+    onHover
+      more-context
+      some-content
+      editable, if authorized
+    ; I think clickable, draggable, will come for free with Alchemy.
+
+term-view
+  default alchemy
+
+reference-view
+  factor out pieces of note-view
+
+edge-view
+  type "next" is shown big and fat with an arrowhead
+  other types : use default alchemy
+
+## Serve the stuff
+
+
