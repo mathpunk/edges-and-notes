@@ -10,6 +10,7 @@
 (let [uri "mongodb://feuille/livre"]
   (mg/connect-via-uri! uri))
 
+
 ;; COLLECTIONS: NOTES
 ;; ==============================================================================
 ;
@@ -39,6 +40,8 @@
 ; ==========================================================================================
 ; OTHER COLLECTIONS: CARDS, NOTEBOOKS, and WIKI
 ; ==========================================================================================
+; Of possible interest later.
+;
 ; INDEX CARDS
 ;   cards           ; pictures of cards
 ;   annotations     ; markings for cards
@@ -53,5 +56,3 @@
 ; but could be fun for vocabulary stats or a mess of Burroughs text or something?
 ;
 ;   articles        ; threw a pm wiki at it or something?
-
-
