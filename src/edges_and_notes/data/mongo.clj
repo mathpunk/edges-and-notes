@@ -3,27 +3,55 @@
               [monger.collection :as mc]
               [monger.operators :refer :all]))
 
+;; CONNECTION
+;; ==============================================================================
+;; feuille is an ssh tunnel on my machine to where the database is hosted
 ;; livre is the name of the database
-;; feuille is an ssh tunnel to where the database is hosted
 (let [uri "mongodb://feuille/livre"]
   (mg/connect-via-uri! uri))
 
-;; =============================================================================
-;; My data collections
-;; =============================================================================
-; db livre
+;; COLLECTIONS: NOTES
+;; ==============================================================================
+;
+; The first priority is retrieving the "evernotes" collection. Only the ones from the "morgue" and "morgue archive"
+; are wanted for this project. Let's leave out the "content" for now and concentrate on the graph structure that emerges
+; from the tags only; we can always get content from the Mongo DB later.
 
-; collections
+(mc/find-one-as-map "evernotes" {:notebook (or "morgue" "morgue archive")} ["_id" "tags" "title" "url"])
+(defn retrieve-notes-with-content []
+  "Retrieves every note from the evernotes collection, morgue/morgue archive notebook, with content. Resource intensive
+  (at least a minute)."
+  (mc/find-maps "evernotes" {:notebook (or "morgue" "morgue archive")}))
+
+(defn retrieve-notes []
+  "Retrieves every note from the evernotes collection, morgue/morgue archive notebook, excluding content for
+  lighter use of resources (a few seconds)."
+  (mc/find-maps "evernotes" {:notebook (or "morgue" "morgue archive")} ["_id" "tags" "title" "url"]))
+
+(defn retrieve-content-by-oid [oid]
+  "Given the _id from an evernote map, return the content from the livre database."
+  ,,,)
+
+
+
+
+
+; ==========================================================================================
+; OTHER COLLECTIONS: CARDS, NOTEBOOKS, and WIKI
+; ==========================================================================================
 ; INDEX CARDS
 ;   cards           ; pictures of cards
 ;   annotations     ; markings for cards
 ;   agents          ; useragents of those who marked cards
+;
 ; NOTEBOOK SCANS
 ;   notebookPages   ; pictures of notebook pages
-; NOTES
-;   evernotes       ; notes migrated from evernote, lacking dates
+;   See also Google Docs spreadsheet for pages that are useable
+;
+; ARCHIVED WIKI
+; There's also an "articles" collection, from when I chucked a Punk Mathematics wiki at the database. Not of great interest
+; but could be fun for vocabulary stats or a mess of Burroughs text or something?
+;
 ;   articles        ; threw a pm wiki at it or something?
 
-(let [coll "evernotes"
-      term "fucked"]
-  (mc/find-one-as-map coll {:tags term :notebook (or "morgue" "morgue archive")}))
+

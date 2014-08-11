@@ -8,7 +8,10 @@ Terms
     swear word?
     ordinary abstraction word?
     stop word?
-  edges
+  edges (outer)
+    tags a Note
+    tags a Chapter or Material
+  edges (inner, i.e., to other terms)
     sub term
     super term
     synonym term
@@ -18,14 +21,18 @@ Notes
   attrs
     id
     _id
+    neoid (toss the above unless keeping content in Mongo; neo provides an id)
     title
     content
     url
-   edges
-     tagged-with term
-     has-as-vocabulary term
+   edges (outer)
+     tagged Term
+     contains Term (in content, description, comment, or title) (hey where did description and comment go)
+   edges (inner)
+     related by one or more Terms to Note
+     possibly duplicates Note
 
-Material
+Material/Chapters
   attrs
     title
     content
@@ -34,9 +41,13 @@ Material
     references, if any
     diagrams, if any
     word count
-  edges
-    relevant term
-    refers-to note
+  edges (outer)
+    tagged Term
+    refers-to Note
+    contains Term
+  edges (inner)
+    next
+    prev
 
  Cards
    has annotation
