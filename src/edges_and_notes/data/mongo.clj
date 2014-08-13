@@ -1,4 +1,4 @@
-(ns edges-and-notes.data.core
+(ns edges-and-notes.data.mongo
     (:require [monger.core :as mg]
               [monger.collection :as mc]
               [monger.operators :refer :all]))
@@ -19,6 +19,7 @@
 ; from the tags only; we can always get content from the Mongo DB later.
 
 (mc/find-one-as-map "evernotes" {:notebook (or "morgue" "morgue archive")} ["_id" "tags" "title" "url"])
+
 (defn retrieve-notes-with-content []
   "Retrieves every note from the evernotes collection, morgue/morgue archive notebook, with content. Resource intensive
   (at least a minute)."
@@ -33,6 +34,7 @@
   "Given the _id from an evernote map, return the content from the livre database."
   ,,,)
 
+(take 10 (retrieve-notes))
 
 
 
