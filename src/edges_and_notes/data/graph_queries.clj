@@ -1,22 +1,3 @@
-(ns edges-and-notes.data.neo
-  (:require [clojurewerkz.neocons.rest :as rest]
-            [clojurewerkz.neocons.rest.nodes :as nodes]
-            [clojurewerkz.neocons.rest.relationships :as edges]
-            [clojurewerkz.neocons.rest.cypher :as cy]
-            [edges-and-notes.data.mongo :as mongo]))
-
-
-(def notes (mongo/retrieve-notes))
-
-(take 10 notes)
-
-(let [conn  (rest/connect "http://localhost:7474/db/data/")]
-  (nodes/create-index conn "an-index"))
-
-
-
-
-
 ; =======================================================================================
 ; SAMPLE CYPHER QUERIES (not even a little idempotent)
 ; =======================================================================================
